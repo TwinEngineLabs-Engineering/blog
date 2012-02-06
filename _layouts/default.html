@@ -10,7 +10,7 @@
   <meta property="og:image" content="{{ page.image }}"/>
   {% endif %}
   <title>
-    {% unless page.home %}{{ page.title }} - {% endunless %} Mike Mayo
+    {% unless page.home %}{{ page.title }} - {% endunless %} Twin Engine Labs Engineering
   </title>
   <link rel="stylesheet" href="/css/reset.css" type="text/css" />
   {{ page.head }}
@@ -40,28 +40,22 @@
     <div id="inner">
       <div id="container">
         <div id="header">
-          <h1>
-            {% if page.home %}
-             Mike Mayo
-            {% else %}
-              <a href="/">&larr; Mike Mayo</a>
-            {% endif %}
-          </h1>
+          {% if page.home %}
+            <img src="/images/twinengine_logo.png" />
+          {% else %}
+            <a href="/">&larr; <img src="/images/twinengine_logo.png" /></a>
+          {% endif %}
           <ul>
             <li>
-              <a href="/projects">Projects</a>
+              <a href="https://github.com/TwinEngineLabs-Engineering">Github &rarr;</a>
             </li>
+            
             <li>
-              <a href="http://github.com/gotmayonase">Github &rarr;</a>
+              <a href="/team">Team</a>
             </li>
+            
             <li>
-              <a href="http://twitter.com/mike_mayo">Twitter &rarr;</a>
-            </li>
-            <li>
-              <a href="/contact">Contact</a>
-            </li>
-            <li>
-              <a href="/resume.html">Resume</a>
+              <a href="/about">About</a>
             </li>
           </ul>
           <hr class="right"/>
@@ -71,11 +65,6 @@
       </div> <!-- end #container -->
 
       <div id="ads">
-        <div class="ad" id="promotejs">
-          <a href='https://developer.mozilla.org/en/JavaScript' title='Learn JS'>
-            <img src='http://static.jsconf.us/promotejsv.gif' height='280' width='160' alt='JS Function .arguments'/>
-          </a>
-        </div>
       </div> <!-- end #ads -->
       
       <div id="footer">
