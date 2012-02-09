@@ -4,7 +4,7 @@ layout: default
 
 {% if page.author %}
   <p>
-    By <a href="/team/{{page.author.first_name}}">{{page.author.first_name}} {{page.author.last_name}}</a>
+    By <a href="/team/#{{page.author.first_name}}">{{page.author.full_name}}</a>
   </p>
 {% endif %}
 
@@ -30,18 +30,4 @@ layout: default
   </a>
 </span>
 
-<hr/>
-
-<div id="disqus_thread"></div>
-<script type="text/javascript">
-  var disqus_shortname = 'mikemayoblog';
-
-  /* * * DON'T EDIT BELOW THIS LINE * * */
-  (function() {
-      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
-      dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
-      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
-  })();
-</script>
-<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
-<a href="http://disqus.com" class="dsq-brlink">blog comments powered by <span class="logo-disqus">Disqus</span></a>
+<div style="clear: both;"></div>

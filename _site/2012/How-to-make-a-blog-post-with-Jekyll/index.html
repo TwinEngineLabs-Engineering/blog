@@ -1,0 +1,159 @@
+<!doctype html>
+<html>
+<head>
+  <meta name="google-site-verification" content="bHeMePUL_gILh9s3NFMaeYXRhd2-_POiFpUcFt1y4Pk" />
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta name="viewport" content="width=550, maximum-scale=1.0" />
+  <meta name="keywords" content="mike mayo, mikemayo, Jekyll, how-to, guide, blog" />
+  <meta name="description" content="An overview of how the basics of Jekyll-based blogging works." />
+  
+  <title>
+    How to make a blog post with Jekyll -  Twin Engine Labs Engineering
+  </title>
+  <link rel="stylesheet" href="/css/reset.css" type="text/css" />
+  
+  <link rel="stylesheet" href="/css/screen.css" type="text/css" />
+  <link rel="stylesheet" href="/css/syntax.css" type="text/css" />
+  <link rel="stylesheet" media="only screen and (max-device-width: 480px)" href="/css/iphone.css" type="text/css" />
+  <link rel="stylesheet" media="only screen and (max-device-width: 1024px)" href="/css/ipad.css" type="text/css" />
+  <link href='http://fonts.googleapis.com/css?family=Droid+Sans:400,700|Ubuntu:400,700' rel='stylesheet' type='text/css'>
+  <link rel="alternate" type="application/atom+xml" href="http://feeds.feedburner.com/mikemayo" />
+  <link href="/images/favicon.ico" rel="shortcut icon" type="image/x-icon" />
+  <link href="/images/icon.jpg" rel="apple-touch-icon" />
+  <script type="text/javascript">
+
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-20085238-1']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+
+  </script>
+</head>
+<body>
+  <div id="wrapper">
+    <div id="inner">
+      <div id="container">
+        <div id="header">
+          
+            <a href="/"><img src="/images/twinengine_logo.png" /></a>
+          
+          <ul>
+            <li>
+              <a href="https://github.com/TwinEngineLabs-Engineering">Github &rarr;</a>
+            </li>
+            
+            <li>
+              <a href="/team">Team</a>
+            </li>
+            
+            <li>
+              <a href="/about">About</a>
+            </li>
+          </ul>
+          <hr class="right"/>
+        </div> <!-- end #header -->
+        <h2>How to make a blog post with Jekyll</h2>
+        
+  <p>
+    By <a href="/team/#mike">Mike Mayo</a>
+  </p>
+
+
+<p class="article_date date">
+  08 Feb 2012
+</p>
+
+<hr/>
+
+<div id="content">
+	<div style="text-align:center">
+<img src="/images/jekyll.jpg" height="300"/>
+<br>
+  <p class="caption">No not that Jekyll!</p>
+</div>
+<p>We&#8217;ve finally gotten around to setting up a blog site for the engineering team at <a href="http://twinenginelabs.com">Twin Engine Labs</a>, and I thought it appropriate to have the first post be a guide to all those who&#8217;ve never done this before.</p>
+<p>For the purpose of this guide, I&#8217;m going to assume you&#8217;ve already gotten a basic Jekyll blog site setup, and I&#8217;ll be highlighting some of the functionality I use and showing you how to create your first post. If you don&#8217;t have a blog setup, feel free to fork my <a href="https://github.com/gotmayonase/blog">personal blog on GitHub</a> (that&#8217;s actually what we did to get this blog going). If you like to start fresh, just take a look at the <a href="https://github.com/mojombo/jekyll">Jekyll GitHub repo</a> for some instructions.</p>
+<h3>Highlight Reel</h3>
+<div class="indent">
+<h4>Generating the site</h4>
+<p>If you&#8217;re unfamiliar, Jekyll is a static site generator. This means you&#8217;re not working in the type of server environment you might be used to if you&#8217;re working with Rails or another web framework. Running <code>jekyll</code> without any options will take all of your posts and any content in the current directory, and generate a static site in the <code>_site</code> directory. Posts are organized by a configuration in the <code>_config.yml</code> file called <code>permalink</code>. I&#8217;ve got mine set to <code>/:year/:title</code>, so posts end up stored under a folder named for the current year, and in a file named <code>my-blog-post-title.html</code>.</p>
+<h4>Running the server</h4>
+<p>Jekyll does come with the ability to run a WebBrick server while you&#8217;re developing, and also has a flag to auto-regenerate the static files as things change.  To start this just run <code>jekyll -a --server</code> in your project directory.</p>
+<h4>Faster regeneration</h4>
+<p>Since this is your first post, regenerating files should go rather quickly. However things can slow down once you have more content, so something that can help while you&#8217;re crafting a post is to pass the <code>--limit_posts 1</code> option when running the server. This will instruct Jekyll to only regenerate the most recent post, which is likely the one you&#8217;re working on. If you&#8217;re working on an older post, be sure to increase 1 as needed, or just not pass this flag at all. <sup><a href="#footnote1">1</a></sup></p>
+<h4>Code syntax highlighting</h4>
+<p>If you want to include code examples in your blog, Jekyll can give you syntax highlighting easily via the Pygments library. It&#8217;s a Python library you&#8217;ll have to install on your system, and the guide can be found <a href="https://github.com/mojombo/jekyll/wiki/install">here</a>. Once you&#8217;ve got that installed, be sure to pass <code>--pygments</code> when running the server.  Then just wrap any code example in highlight block and pass it the language you&#8217;re highlighting. For example:</p>
+<div class="highlight"><pre><code class="ruby">  <span class="c1"># ruby code</span>
+</code></pre>
+</div>
+<p>was generated from the following code:</p>
+<div style="text-align: center;">
+<img src="/images/syntax_highlighting.png" width="150"/>
+</div>
+<p>It has support for a ton of languages, which you can see a list of <a href="http://pygments.org/languages/">right here</a>. Now all this does is wrap the code in a <code>&lt;pre&gt;</code> block and then break it up into a lot of <code>&lt;span&gt;</code>s with special <span class="caps">CSS</span> classes attached. You&#8217;ll have to provide styling to get the colors you want, but the <a href="http://mikemayo.org/css/syntax.css">syntax.css</a> stylesheet from my blog should give you a good starting point, and I&#8217;m certain that there are some other stylesheets out on the web if you look hard enough.</p>
+<h4>Make your data meta</h4>
+<p>Jekyll uses <a href="https://github.com/mojombo/jekyll/wiki/YAML-Front-Matter"><span class="caps">YAML</span> Front Matter</a> for configurations, and you can setup variables at the top of your post file by delimiting it with three dashes. Any variable you set there will be available off the <code>page</code> object inside your post, or, if you&#8217;re accessing the post outside of that file, whatever variable you&#8217;ve got it assigned to. You also have global access to a <code>posts</code>, which is another place you might make use of those variables. I generally use things like <code>title</code>, <code>excerpt</code> (for a synopsis in listings), <code>keywords</code>, <code>author</code> (for blogs that support multiple authors), etc&#8230; There is also the <code>layout</code> variable if you want to render your post inside another defined layout, and the <code>published</code> variable (set to true if you want a post visible, false if you don&#8217;t).  Example, the metadata for this post:</p>
+<div style="text-align: center;">
+<img src="/images/metadata.png" width="512" />
+</div>
+</div>
+<h3>Cut the chit-chat, let&#8217;s make a post!</h3>
+<p>Alright so now that you know some of the neat stuff we can do, let&#8217;s go ahead and create a post. First, if you&#8217;ve cloned my blog or are using something similar, you&#8217;ll likely have a directory structure like so:</p>
+<div style="text-align:center;">
+<img src="/images/jekyll_file_tree.png" width="126" />
+</div>
+<p>The <code>_site</code> directory is where the static site will be generated by default; everything else is fairly self-explanatory. All of your posts will go into the <code>_posts</code> directory. If you want a rundown of all of the other directories, see <a href="https://github.com/mojombo/jekyll/wiki/Usage">this wiki page</a>.</p>
+<p>When creating your post, it&#8217;s important to follow the correct naming convention when creating your posts. The files should be named like so:</p>
+<div class="highlight"><pre><code class="ruby">  <span class="n">_posts</span><span class="o">/</span><span class="n">yyyy</span><span class="o">-</span><span class="n">mm</span><span class="o">-</span><span class="n">dd</span><span class="o">-</span><span class="n">your</span><span class="o">-</span><span class="n">blog</span><span class="o">-</span><span class="n">title</span><span class="o">.</span><span class="n">your_extension_of_choice</span>
+</code></pre>
+</div>
+<p>I personally write all my blogs in Textile, but Jekyll also supports Markdown or just plain <span class="caps">HTML</span>. If you&#8217;re going to use Textile, check out the <a href="http://redcloth.org/textile">RedCloth Textile guide</a>, it&#8217;s a great resource for all the available options.</p>
+<p>Now create your file, throw the appropriate metadata at the top, and get to writing. If you&#8217;re running the server with the <code>-a</code> option, files will regenerate as you save though sometimes it may take a couple refreshes to see the changes. That&#8217;s really all there is to writing your first blog post.</p>
+<p>Once you&#8217;ve finished, I&#8217;d suggest stopping the server and then running <code>jekyll</code> or <code>jekyll --pygments</code> (if you&#8217;ve got syntax highlighting) to regenerate the entire site. This is especially important if you&#8217;re running it with the <code>--limit_posts</code> option as it will have only been auto-generating the number of posts you&#8217;ve specified and your other posts will be sadly missing.</p>
+<h3>Deploying to Heroku</h3>
+<p><a href="http://heroku.com">Heroku</a> is a phenomenal service for hosting something like this, so it&#8217;s where I choose to deploy to. I&#8217;m not gonna go through how to setup a Heroku account with you, as they have plenty of excellent guides for that. However, if you want to use Heroku to deploy a Jekyll site, I&#8217;d suggest looking at the <a href="https://github.com/adaoraul/rack-jekyll">rack-jekyll</a> gem. The current version in RubyGems is a little dated, and relies on some older versions of gems, so I&#8217;d suggest using the latest from Git. Unfortunately there&#8217;s some gotchas with doing that, but I&#8217;ve got a <a href="http://mikemayo.org/2012/deploying-jekyll-sites-to-heroku-with-rack-jekyll/">blog post</a> up detailing how to get around that.</p>
+<h3>Fin!</h3>
+<p>That should cover the basics for creating your first Jekyll blog post.  If you&#8217;ve got any further questions, feel free to hit me up via <a href="http://twitter.com/mike_mayo">Twitter</a>, or IM/Email if you&#8217;ve got my info.</p>
+<div id="post_footer">
+<h4>Footnotes</h4>
+<ol>
+	<li id="footnote1"><a href="http://scottpatten.ca/2011/11/speeding-up-jekyll-generation.html#comment-430573417">Speeding up Jekyll generation</a>, Scott Patten<br />
+</div></li>
+</ol>
+</div>
+
+<span class="article_buttons">
+  <a href="http://feeds.feedburner.com/mikemayo">
+    <span class="balloon">subscribe!</span> <img src="/images/rss.png"/>
+  </a>
+  <a class="reddit" href="http://www.reddit.com/submit" onclick="window.location = 'http://www.reddit.com/submit?url=' + encodeURIComponent(window.location); return false">
+    <span class="balloon">reddit!</span> <img src="/images/reddit.png"/>
+  </a>
+  <a class="hackernews" href="javascript:window.location=%22http://news.ycombinator.com/submitlink?u=%22+encodeURIComponent(document.location)+%22&t=%22+encodeURIComponent(document.title)">
+    <span class="balloon">hacker news!</span> <img src="/images/hn.png"/>
+  </a>
+</span>
+
+<div style="clear: both;"></div>
+      </div> <!-- end #container -->
+
+      <div id="ads">
+      </div> <!-- end #ads -->
+      
+      <div id="footer">
+        <p>
+          Blog design by <a href="http://jeffkreeftmeijer.com/">Jeff Kreeftmeijer</a>
+        </p>
+      </div> <!-- end #footer -->
+      
+    </div> <!-- end #inner -->
+  </div> <!-- end #wrapper -->
+
+  <script src="/js/jquery.js" type="text/javascript"></script>
+</body>
+</html>

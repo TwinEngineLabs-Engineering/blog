@@ -1,0 +1,102 @@
+---
+layout: post
+title: How to make a blog post with Jekyll
+excerpt: An overview of how the basics of Jekyll-based blogging works.
+published: true
+category: 
+keywords: Jekyll, how-to, guide, blog
+image:
+author:
+  twitter: mike_mayo
+  first_name: mike
+  full_name: Mike Mayo
+  github: gotmayonase
+  team_page: mike.html
+---
+
+<div style="text-align:center">
+  <img src="/images/jekyll.jpg" height="300"/>
+  <br>
+  <p class="caption">No not that Jekyll!</p>
+</div>
+
+We've finally gotten around to setting up a blog site for the engineering team at "Twin Engine Labs":http://twinenginelabs.com, and I thought it appropriate to have the first post be a guide to all those who've never done this before.
+
+For the purpose of this guide, I'm going to assume you've already gotten a basic Jekyll blog site setup, and I'll be highlighting some of the functionality I use and showing you how to create your first post. If you don't have a blog setup, feel free to fork my "personal blog on GitHub":https://github.com/gotmayonase/blog (that's actually what we did to get this blog going). If you like to start fresh, just take a look at the "Jekyll GitHub repo":https://github.com/mojombo/jekyll for some instructions.
+
+h3. Highlight Reel
+
+<div class="indent">
+
+h4. Generating the site
+
+If you're unfamiliar, Jekyll is a static site generator. This means you're not working in the type of server environment you might be used to if you're working with Rails or another web framework. Running @jekyll@ without any options will take all of your posts and any content in the current directory, and generate a static site in the @_site@ directory. Posts are organized by a configuration in the @_config.yml@ file called @permalink@. I've got mine set to @/:year/:title@, so posts end up stored under a folder named for the current year, and in a file named @my-blog-post-title.html@.
+
+h4. Running the server
+
+Jekyll does come with the ability to run a WebBrick server while you're developing, and also has a flag to auto-regenerate the static files as things change.  To start this just run @jekyll -a --server@ in your project directory.
+
+h4. Faster regeneration
+
+Since this is your first post, regenerating files should go rather quickly. However things can slow down once you have more content, so something that can help while you're crafting a post is to pass the @--limit_posts 1@ option when running the server. This will instruct Jekyll to only regenerate the most recent post, which is likely the one you're working on. If you're working on an older post, be sure to increase 1 as needed, or just not pass this flag at all. ^"1":#footnote1^
+
+h4. Code syntax highlighting
+
+If you want to include code examples in your blog, Jekyll can give you syntax highlighting easily via the Pygments library. It's a Python library you'll have to install on your system, and the guide can be found "here":https://github.com/mojombo/jekyll/wiki/install. Once you've got that installed, be sure to pass @--pygments@ when running the server.  Then just wrap any code example in highlight block and pass it the language you're highlighting. For example:
+
+{% highlight ruby %}
+  # ruby code
+{% endhighlight %}
+
+was generated from the following code:
+
+<div style="text-align: center;">
+  <img src="/images/syntax_highlighting.png" width="150"/>
+</div>
+
+It has support for a ton of languages, which you can see a list of "right here":http://pygments.org/languages/. Now all this does is wrap the code in a @<pre>@ block and then break it up into a lot of @<span>@s with special CSS classes attached. You'll have to provide styling to get the colors you want, but the "syntax.css":http://mikemayo.org/css/syntax.css stylesheet from my blog should give you a good starting point, and I'm certain that there are some other stylesheets out on the web if you look hard enough.
+
+h4. Make your data meta
+
+Jekyll uses "YAML Front Matter":https://github.com/mojombo/jekyll/wiki/YAML-Front-Matter for configurations, and you can setup variables at the top of your post file by delimiting it with three dashes. Any variable you set there will be available off the @page@ object inside your post, or, if you're accessing the post outside of that file, whatever variable you've got it assigned to. You also have global access to a @posts@, which is another place you might make use of those variables. I generally use things like @title@, @excerpt@ (for a synopsis in listings), @keywords@, @author@ (for blogs that support multiple authors), etc... There is also the @layout@ variable if you want to render your post inside another defined layout, and the @published@ variable (set to true if you want a post visible, false if you don't).  Example, the metadata for this post:
+
+<div style="text-align: center;">
+  <img src="/images/metadata.png" width="512" />
+</div>
+</div>
+
+h3. Cut the chit-chat, let's make a post!
+
+Alright so now that you know some of the neat stuff we can do, let's go ahead and create a post. First, if you've cloned my blog or are using something similar, you'll likely have a directory structure like so:
+
+<div style="text-align:center;">
+  <img src="/images/jekyll_file_tree.png" width="126" />
+</div>
+
+The @_site@ directory is where the static site will be generated by default; everything else is fairly self-explanatory. All of your posts will go into the @_posts@ directory. If you want a rundown of all of the other directories, see "this wiki page":https://github.com/mojombo/jekyll/wiki/Usage. 
+
+When creating your post, it's important to follow the correct naming convention when creating your posts. The files should be named like so: 
+
+{% highlight ruby %}
+  _posts/yyyy-mm-dd-your-blog-title.your_extension_of_choice
+{% endhighlight %}
+
+I personally write all my blogs in Textile, but Jekyll also supports Markdown or just plain HTML. If you're going to use Textile, check out the "RedCloth Textile guide":http://redcloth.org/textile, it's a great resource for all the available options. 
+
+Now create your file, throw the appropriate metadata at the top, and get to writing. If you're running the server with the @-a@ option, files will regenerate as you save though sometimes it may take a couple refreshes to see the changes. That's really all there is to writing your first blog post.
+
+Once you've finished, I'd suggest stopping the server and then running @jekyll@ or @jekyll --pygments@ (if you've got syntax highlighting) to regenerate the entire site. This is especially important if you're running it with the @--limit_posts@ option as it will have only been auto-generating the number of posts you've specified and your other posts will be sadly missing.
+
+
+h3. Deploying to Heroku
+
+"Heroku":http://heroku.com is a phenomenal service for hosting something like this, so it's where I choose to deploy to. I'm not gonna go through how to setup a Heroku account with you, as they have plenty of excellent guides for that. However, if you want to use Heroku to deploy a Jekyll site, I'd suggest looking at the "rack-jekyll":https://github.com/adaoraul/rack-jekyll gem. The current version in RubyGems is a little dated, and relies on some older versions of gems, so I'd suggest using the latest from Git. Unfortunately there's some gotchas with doing that, but I've got a "blog post":http://mikemayo.org/2012/deploying-jekyll-sites-to-heroku-with-rack-jekyll/ up detailing how to get around that.
+
+h3. Fin!
+
+That should cover the basics for creating your first Jekyll blog post.  If you've got any further questions, feel free to hit me up via "Twitter":http://twitter.com/mike_mayo, or IM/Email if you've got my info.
+
+<div id="post_footer">
+h4. Footnotes
+#(#footnote1) "Speeding up Jekyll generation":http://scottpatten.ca/2011/11/speeding-up-jekyll-generation.html#comment-430573417, Scott Patten
+</div>

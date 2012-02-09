@@ -10,7 +10,13 @@ excerpt:
     <h3><a href="{{ post.url }}/">{{ post.title }}</a></h3>
     <p class="date">{{ post.date | date_to_string }}
       {% if post.author %}
-        by <a href="http://twitter.com/{{ post.author.twitter }}" title="{{ post.author.full}}">@{{ post.author.twitter }}</a>
+        by <a href="/team#{{post.author.first_name}}">{{post.author.full_name}}</a>
+        {% if post.author.twitter %}
+        <a href="http://twitter.com/{{post.author.twitter}}"><img src="/images/icons/16px/twitter-2.png"></a>
+        {% endif %}
+        {% if post.author.github %}
+        <a href="http://github.com/{{post.author.github}}"><img src="/images/icons/16px/github.png"></a>
+        {% endif %}
       {% endif %}
     </p>
     <p>{{ post.excerpt }}</p>
