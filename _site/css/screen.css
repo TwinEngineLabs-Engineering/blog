@@ -516,3 +516,10 @@ sup a {
 sup a:hover {
   color: white;
 }
+
+#about_the_author {
+  border-top: 2px #fff solid;
+  border-bottom: 2px #fff solid;
+  margin-top: 40px;
+  padding: 0;
+}

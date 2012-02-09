@@ -96,6 +96,12 @@ h3. Fin!
 
 That should cover the basics for creating your first Jekyll blog post.  If you've got any further questions, feel free to hit me up via "Twitter":http://twitter.com/mike_mayo, or IM/Email if you've got my info.
 
+
+<div id="about_the_author">
+h4. About the Author
+{% include mike.html %}
+</div>
+
 <div id="post_footer">
 h4. Footnotes
 #(#footnote1) "Speeding up Jekyll generation":http://scottpatten.ca/2011/11/speeding-up-jekyll-generation.html#comment-430573417, Scott Patten

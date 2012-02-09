@@ -4,7 +4,7 @@
   <title>Mike Mayo</title>
   <link href="http://mikemayo.org/feed.xml" rel="self"/>
   <link href="http://mikemayo.org/"/>
-  <updated>2012-02-09T03:19:55-06:00</updated>
+  <updated>2012-02-09T03:25:12-06:00</updated>
   <id>http://mikemayo.org/</id>
   <author>
     <name>Jeff Mike Mayo</name>
@@ -67,6 +67,19 @@
 &lt;p&gt;&lt;a href=&quot;http://heroku.com&quot;&gt;Heroku&lt;/a&gt; is a phenomenal service for hosting something like this, so it&amp;#8217;s where I choose to deploy to. I&amp;#8217;m not gonna go through how to setup a Heroku account with you, as they have plenty of excellent guides for that. However, if you want to use Heroku to deploy a Jekyll site, I&amp;#8217;d suggest looking at the &lt;a href=&quot;https://github.com/adaoraul/rack-jekyll&quot;&gt;rack-jekyll&lt;/a&gt; gem. The current version in RubyGems is a little dated, and relies on some older versions of gems, so I&amp;#8217;d suggest using the latest from Git. Unfortunately there&amp;#8217;s some gotchas with doing that, but I&amp;#8217;ve got a &lt;a href=&quot;http://mikemayo.org/2012/deploying-jekyll-sites-to-heroku-with-rack-jekyll/&quot;&gt;blog post&lt;/a&gt; up detailing how to get around that.&lt;/p&gt;
 &lt;h3&gt;Fin!&lt;/h3&gt;
 &lt;p&gt;That should cover the basics for creating your first Jekyll blog post.  If you&amp;#8217;ve got any further questions, feel free to hit me up via &lt;a href=&quot;http://twitter.com/mike_mayo&quot;&gt;Twitter&lt;/a&gt;, or IM/Email if you&amp;#8217;ve got my info.&lt;/p&gt;
+&lt;div id=&quot;about_the_author&quot;&gt;
+&lt;h4&gt;About the Author&lt;br /&gt;
+&lt;p style=&quot;float:left;margin-right:10px;margin-top: 0px;&quot;&gt;&lt;br /&gt;
+  &lt;img src=&quot;http://a2.sphotos.ak.fbcdn.net/hphotos-ak-snc6/184908_1740053013720_1010494488_31935885_6850261_n.jpg&quot; style=&quot;width:125px&quot;&gt;&lt;/h4&gt;
+&lt;/p&gt;
+&lt;p&gt;
+  &lt;h4 id=&quot;mike&quot;&gt;Mike Mayo&lt;/h4&gt;
+  &lt;h5&gt;Lead Engineer&lt;/h5&gt;
+  &lt;p&gt;Ruby/Rails/iOS developer and Cycling Enthusiast&lt;/p&gt;
+  &lt;p&gt;I&amp;#8217;ve been developing software professionally since 2004, and I started working with Ruby/Rails in 2007. I&amp;#8217;m now trying to focus on expanding my language exposure and beef up on the fundamentals of web development and object oriented programming.&lt;/p&gt;
+&lt;/p&gt;
+&lt;p&gt;&lt;span style=&quot;clear:both&quot; /&gt;&lt;/p&gt;
+&lt;/div&gt;
 &lt;div id=&quot;post_footer&quot;&gt;
 &lt;h4&gt;Footnotes&lt;/h4&gt;
 &lt;ol&gt;
