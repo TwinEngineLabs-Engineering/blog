@@ -105,6 +105,15 @@ div#container
 
 #content p {
   text-shadow:0 1px 0 #000021;
+  font-weight: 200;
+}
+
+#content p a {
+  color: #0089CD;
+}
+
+#content p a:hover {
+  color: white;
 }
 
 div#content object

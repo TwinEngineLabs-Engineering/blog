@@ -107,6 +107,14 @@ div#container
   text-shadow:0 1px 0 #000021;
 }
 
+#content p a {
+  color: #0089CD;
+}
+
+#content p a:hover {
+  color: white;
+}
+
 div#content object
 {
   -moz-border-radius:5px;
