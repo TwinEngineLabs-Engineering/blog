@@ -1,24 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
 
-  <title>Mike Mayo</title>
-  <link href="http://mikemayo.org/feed.xml" rel="self"/>
-  <link href="http://mikemayo.org/"/>
-  <updated>2012-02-09T21:28:11-06:00</updated>
-  <id>http://mikemayo.org/</id>
+  <title>Twin Engine Labs Engineering</title>
+  <link href="http://dev.twinenginelabs.com/feed.xml" rel="self"/>
+  <link href="http://dev.twinenginelabs.com/"/>
+  <updated>2012-02-09T21:59:16-06:00</updated>
+  <id>http://dev.twinenginelabs.com/</id>
   <author>
-    <name>Jeff Mike Mayo</name>
+    <name>Mike Mayo</name>
   </author>
 
   
   <entry>
     <title type="html">How to make a blog post with Jekyll</title>
-    <link href="http://mikemayo.org/2012/How-to-make-a-blog-post-with-Jekyll"/>
-    <id>http://mikemayo.org/2012/How-to-make-a-blog-post-with-Jekyll</id>
+    <link href="http://dev.twinenginelabs.com/2012/How-to-make-a-blog-post-with-Jekyll"/>
+    <id>http://dev.twinenginelabs.com/2012/How-to-make-a-blog-post-with-Jekyll</id>
     <updated>2012-02-08T00:00:00-06:00</updated>
     <content type="html">
       
-        &lt;p&gt;This is a guest post written by &lt;a href=&quot;http://twitter.com/mike_mayo&quot; title=&quot;&quot;&gt;@mike_mayo&lt;/a&gt;. Liquid error: undefined method `gsub' for nil:NilClass
+        &lt;p&gt;By &lt;a href=&quot;http://dev.twinenginelabs.com/team/#mike&quot; title=&quot;Mike Mayo&quot;&gt;@Mike Mayo&lt;/a&gt;.
       &lt;div style=&quot;text-align:center&quot;&gt;
 &lt;img src=&quot;/images/jekyll.jpg&quot; height=&quot;300&quot;/&gt;
 &lt;br&gt;

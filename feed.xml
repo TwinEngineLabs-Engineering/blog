@@ -4,24 +4,24 @@ layout: none
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
 
-  <title>Mike Mayo</title>
-  <link href="http://mikemayo.org/feed.xml" rel="self"/>
-  <link href="http://mikemayo.org/"/>
+  <title>Twin Engine Labs Engineering</title>
+  <link href="http://dev.twinenginelabs.com/feed.xml" rel="self"/>
+  <link href="http://dev.twinenginelabs.com/"/>
   <updated>{{ site.time | date_to_xmlschema }}</updated>
-  <id>http://mikemayo.org/</id>
+  <id>http://dev.twinenginelabs.com/</id>
   <author>
-    <name>Jeff Mike Mayo</name>
+    <name>Mike Mayo</name>
   </author>
 
   {% for post in site.posts %}
   <entry>
     <title type="html">{{ post.title | xml_escape }}</title>
-    <link href="http://mikemayo.org{{ post.url }}"/>
-    <id>http://mikemayo.org{{ post.url }}</id>
+    <link href="http://dev.twinenginelabs.com{{ post.url }}"/>
+    <id>http://dev.twinenginelabs.com{{ post.url }}</id>
     <updated>{{ post.date | date_to_xmlschema }}</updated>
     <content type="html">
       {% if post.author %}
-        &lt;p&gt;This is a guest post written by &lt;a href=&quot;http://twitter.com/{{ post.author.twitter }}&quot; title=&quot;{{ post.author.full}}&quot;&gt;@{{ post.author.twitter }}&lt;/a&gt;. {{ post.author.description | xml_escape }}
+        &lt;p&gt;By &lt;a href=&quot;http://dev.twinenginelabs.com/team/#{{post.author.first_name}}&quot; title=&quot;{{ post.author.full_name}}&quot;&gt;@{{ post.author.full_name }}&lt;/a&gt;.
       {% endif %}{{ post.content | xml_escape }}
     </content>
   </entry>

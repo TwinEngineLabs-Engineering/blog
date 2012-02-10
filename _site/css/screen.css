@@ -10,9 +10,9 @@ html
 
 body
 {
-  -moz-background-size:100% auto;
+  /*-moz-background-size:100% auto;
   -o-background-size:100% auto;
-  -webkit-background-size:100% auto;
+  -webkit-background-size:100% auto;*/
   background-attachment:fixed;
   background-color:#fff;
   background-image:url('../images/background.jpg');
@@ -105,6 +105,7 @@ div#container
 
 #content p {
   text-shadow:0 1px 0 #000021;
+  font-weight: 200;
 }
 
 #content p a {
