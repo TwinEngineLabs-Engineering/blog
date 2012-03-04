@@ -1,0 +1,132 @@
+body {
+  padding-top: 60px;
+  background: url(/images/bg-big-header-holder.png) 0 0 repeat-x !important;
+  background-color: #EEE !important;
+}
+
+#wrapper {
+  -webkit-border-radius: 8px;
+  border-radius: 8px;
+  border: 1px solid #EEE;
+  padding: 20px;
+  background-color: white;
+  min-height: 500px;
+  box-shadow: 4px 4px 12px 4px rgba(0,0,0,0.1);
+}
+
+#main {
+  padding: 20px;
+}
+
+#main h1 {
+  font-size: 28px;
+  font-weight: bold;
+  line-height: 42px;
+  padding-bottom: 4px;
+  padding-top: 20px;
+  font-family: 'Open Sans',sans-serif;
+}
+
+#apps {
+  padding: 20px;
+  height: 603px;
+  -webkit-border-radius: 10px;
+  border-radius: 10px;
+
+  border: 1px solid #EEE;
+}
+
+.innershadow {
+  -webkit-box-shadow: inset 0 0 12px 1px rgba(0,0,0,0.2);
+  box-shadow: inset 0 0 12px 1px rgba(0,0,0,0.2);
+}
+
+@font-face {
+  font-family: 'Open Sans';
+  font-style: normal;
+  font-weight: 800;
+  src: local('Open Sans Extrabold'), local('OpenSans-Extrabold'), url('https://themes.googleusercontent.com/static/fonts/opensans/v6/EInbV5DfGHOiMmvb1Xr-hnhCUOGz7vYGh680lGh-uXM.woff') format('woff');
+}
+
+.payment-errors {
+  color: red;
+}
+
+.team div.span2 {
+  height: 100px;
+  width: 155px;
+  border: 1px solid #EEE;
+  -webkit-border-radius: 4px;
+  border-radius: 4px;
+  margin-bottom: 20px;
+  padding-top: 10px;
+
+}
+
+.team div.span2 a {
+  display: block;
+}
+
+.team div.span2 a img {
+  display:block;
+  margin: 0 auto;
+  outline: 0;
+}
+
+#apps {
+  background-color: #EEE;
+}
+
+#apps img {
+  margin: 55px auto;
+}
+
+.btn-buy {
+  color: white;
+  text-shadow: none;
+  font-size: 13px;
+  margin: 30px auto;
+  display: block;
+  width: 156px;
+}
+
+/* footer */
+.footer {
+  margin-top: 20px;
+  background:url(/images/bg.png);
+  color:#FFFFFF; 
+  width:100%;
+}
+.footer_content {
+  min-height:140px;
+} 
+.footer_bottom {
+  background:#2c2e2e; 
+  min-height:40px;
+} 
+.footer_bottom {
+  background:url(/images/bg.png);
+}
+.footer_bottom, .footer_bottom h3 {
+  color:#FFFFFF;
+} 
+.footer_render {
+  padding-top:20px;
+}
+.footer a {
+  color:#FFFFFF;
+} 
+.footer h4 {
+  color:#FFFFFF;
+} 
+.frow { 
+  background:url(../img/row.png) top left no-repeat; 
+  background:url(../img/row.png) 5% 0% no-repeat; 
+  padding-top:20px;
+}
+.frow_white { 
+  background:url(../img/row_w.png) top left no-repeat; 
+  background:url(../img/row_w.png) 30% 0% no-repeat; 
+  padding-top:20px;
+}
+/* end of footer */
