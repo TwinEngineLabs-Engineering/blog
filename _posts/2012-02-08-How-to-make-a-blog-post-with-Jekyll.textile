@@ -3,7 +3,8 @@ layout: post
 title: How to make a blog post with Jekyll
 excerpt: An overview of how the basics of Jekyll-based blogging works.
 published: true
-category: 
+categories:
+  blog
 keywords: Jekyll, how-to, guide, blog
 image:
 author:
