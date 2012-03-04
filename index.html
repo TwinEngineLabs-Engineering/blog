@@ -5,44 +5,8 @@ title:
 excerpt: 
 ---
 
-{% for post in paginator.posts %}
-  <div class="post">
-    <h3><a href="{{ post.url }}/">{{ post.title }}</a></h3>
-    <p class="date">{{ post.date | date_to_string }}
-      {% if post.author %}
-        by <a href="/team#{{post.author.first_name}}">{{post.author.full_name}}</a>
-        {% if post.author.twitter %}
-        <a href="http://twitter.com/{{post.author.twitter}}"><img src="/images/icons/16px/twitter-2.png"></a>
-        {% endif %}
-        {% if post.author.github %}
-        <a href="http://github.com/{{post.author.github}}"><img src="/images/icons/16px/github.png"></a>
-        {% endif %}
-      {% endif %}
-    </p>
-    <p>{{ post.excerpt }}</p>
+<div class="row picture-frame">
+  <div class="span12">
+    <iframe src="http://player.vimeo.com/video/24254531?title=0&amp;byline=0&amp;portrait=0&amp;autoplay=0&amp;loop=0" title="" scrolling="no" width="900" height="340" frameborder="0" marginheight="0"></iframe>
   </div>
-{% endfor %}
-
-{% if paginator.total_pages > 1 %}
-<!-- Pagination links -->
-<div class="pagination">
-  {% if paginator.previous_page %}
-    {% if paginator.previous_page == 1 %}
-      <a href="/" class="previous">Previous</a>
-    {% else %}
-      <a href="/page{{paginator.previous_page}}" class="previous">Previous</a>
-    {% endif %}
-  {% else %}
-    <span class="previous">Previous</span>
-  {% endif %}
-  <div class='page-container'>
-    <span class="page_number ">Page: {{paginator.page}} of {{paginator.total_pages}}</span>
-  </div>
-  {% if paginator.next_page %}
-    <a href="/page{{paginator.next_page}}" class="next ">Next</a>
-  {% else %}
-    <span class="next ">Next</span>
-  {% endif %}
 </div>
-<div style="clear: both"></div>
-{% endif %}

@@ -5,13 +5,19 @@ body {
 }
 
 #wrapper {
-  -webkit-border-radius: 8px;
-  border-radius: 8px;
-  border: 1px solid #EEE;
+  //-webkit-border-radius: 8px;
+  //border-radius: 8px;
+  //border: 1px solid #EEE;
   padding: 20px;
-  background-color: white;
+  //background-color: white;
   min-height: 500px;
-  box-shadow: 4px 4px 12px 4px rgba(0,0,0,0.1);
+  //box-shadow: 4px 4px 12px 4px rgba(0,0,0,0.1);
+}
+
+.picture-frame {
+  background: url(/images/bg-home-banner.png) 0 0 no-repeat;
+  min-height: 419px;
+  padding-top: 20px;
 }
 
 #main {
@@ -130,3 +136,16 @@ body {
   padding-top:20px;
 }
 /* end of footer */
+
+.branding {
+  margin-left: -40px;
+}
+
+.tel-menu {
+  padding-top: 30px;
+  padding-right: 20px;
+}
+
+.tel-menu .span1 {
+  margin-left: 10px;
+}
