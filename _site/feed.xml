@@ -4,7 +4,7 @@
   <title>Twin Engine Labs Engineering</title>
   <link href="http://dev.twinenginelabs.com/feed.xml" rel="self"/>
   <link href="http://dev.twinenginelabs.com/"/>
-  <updated>2012-03-04T17:05:58-06:00</updated>
+  <updated>2012-03-04T17:06:54-06:00</updated>
   <id>http://dev.twinenginelabs.com/</id>
   <author>
     <name>Mike Mayo</name>
@@ -65,16 +65,7 @@
 &lt;p&gt;That should cover the basics for creating your first Jekyll blog post.  If you&amp;#8217;ve got any further questions, feel free to hit me up via &lt;a href=&quot;http://twitter.com/mike_mayo&quot;&gt;Twitter&lt;/a&gt;, or IM/Email if you&amp;#8217;ve got my info.&lt;/p&gt;
 &lt;div id=&quot;about_the_author&quot;&gt;
 &lt;h4&gt;About the Author&lt;br /&gt;
-&lt;p style=&quot;float:left;margin-right:10px;margin-top: 0px;&quot;&gt;&lt;br /&gt;
-  &lt;img src=&quot;http://a2.sphotos.ak.fbcdn.net/hphotos-ak-snc6/184908_1740053013720_1010494488_31935885_6850261_n.jpg&quot; style=&quot;width:125px&quot;&gt;&lt;/h4&gt;
-&lt;/p&gt;
-&lt;p&gt;
-  &lt;h4 id=&quot;mike&quot;&gt;Mike Mayo&lt;/h4&gt;
-  &lt;h5&gt;Lead Engineer&lt;/h5&gt;
-  &lt;p&gt;Ruby/Rails/iOS developer and Cycling Enthusiast&lt;/p&gt;
-  &lt;p&gt;I&amp;#8217;ve been developing software professionally since 2004, and I started working with Ruby/Rails in 2007. I&amp;#8217;m now trying to focus on expanding my language exposure and beef up on the fundamentals of web development and object oriented programming.&lt;/p&gt;
-&lt;/p&gt;
-&lt;p&gt;&lt;span style=&quot;clear:both&quot; /&gt;&lt;/p&gt;
+Included file &amp;#8216;mike.html&amp;#8217; not found in _includes directory&lt;/h4&gt;
 &lt;/div&gt;
 &lt;div id=&quot;post_footer&quot;&gt;
 &lt;h4&gt;Footnotes&lt;/h4&gt;
