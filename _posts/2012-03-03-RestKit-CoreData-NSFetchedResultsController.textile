@@ -1,0 +1,376 @@
+---
+layout: post
+title: RestKit, Core Data, and the NSFetchedResultsController
+excerpt: A guide to mapping JSON to Core Data entities and using an NSFetchedResultsController to display them. 
+published: true
+categories: 
+  iOS
+  blog
+keywords: iOS, Core-Data, RestKit, NSFetchedResultsController, object-mapping
+image:
+author:
+  twitter: jdjennin
+  first_name: Jacob
+  full_name: Jacob Jennings
+  github: jdjennin
+  team_page: jacob.html
+---
+
+We all know how to clone RestKit. Some of us even know how to map JSON to objects using the copies of the RestKit tutorial on Github that pollute Google's search results. For those of us who don't have time to stab in the dark, though, creating an ad hoc solution based on forum posts and dated (or just plain wrong) tutorials just isn't enough. After finally having enough, I would like to spare others the troubles I've faced when wrangling RestKit. The goal of this tutorial is not to go over how to include RestKit in your projects--<a href="https://github.com/RestKit/RestKit/wiki/Installing-RestKit-in-Xcode-4.x">you can find information on that with ease</a>--but rather to provide a guide for object mapping, Core Data persistence, and getting up to speed on the power of RestKit quickly.
+
+<h3>Configuring the Core Data model</h3>
+
+We will assume you already know how to clone and use RestKit in your project. For this tutorial, we will use a hypothetical data model. Let's say we have events that are taking place at a certain location with attendees. The first thing to do is configure our data model in Xcode. If you chose to use Core Data when you created your project, the necessary *.xcdatamodeld file will have been created for you. If not, create it through Xcode's "New File" dialog by choosing "Core Data" in the left pane and selecting "Data Model". Selecting it in Xcode's navigation pane will show an empty screen much like the one below.
+
+<div style="text-align:center"><img src="/images/01.png" /></div>
+
+Our first task is to create some entities. "Entity" is just another word for model (as used in the Ruby world). The relationships between these objects will be the same as they are on the server. That is, an Event has many Attendees, an Attendee has many Events, and a Location belongs to an Event (rather, an Event has one Location). Given our scenario, we will need three entities: Event, Location, and Attendee. To add a new entity, simply click the "Add Entity" button and give it the appropriate name. After creating these three entities, we need to give them some properties. Let's say that the JSON looks like this:
+
+{% highlight javascript %}
+[{"name":"TechX20","event_id":2,
+"location":{"name":"Cohab","location_id":1},
+"attendees":[{"name":"John","attendee_id":2},
+{"name":"Okonkwe Iwi","attendee_id":6}]},
+
+{"name":"Another Event","event_id":3,
+"location":{"name":"Chuck E Cheese","location_id":2},
+"attendees":[{"name":"Julie Chestnuts","attendee_id":3},
+{"name":"Bobert Jones","attendee_id":4},
+{"name":"Victoria BonQuiQui Johnson","attendee_id":5}]},
+
+{"name":"Party Time","event_id":4,
+"location":{"name":"Party City","location_id":3},
+"attendees":[{"name":"Party Monster","attendee_id":7},
+{"name":"Rock Lobster","attendee_id":8}]}]	
+	
+{% endhighlight %}
+
+Let's generalize this a bit further:
+
+Event
+Properties:
+- event_id - integer - primary key
+- name - string
+
+Relationships:
+- location
+- attendees
+
+Attendee
+Properties:
+- attendee_id - integer - primary key
+- name - string (first and last names, for simplicity's sake)
+
+Relationships:
+- events
+
+Location:
+Properties:
+- location_id - integer - primary key
+- name - string
+
+Relationships:
+- event
+
+You can add properties to entities by clicking the "+" button at the bottom of the "Attributes" table, as seen below.
+
+<div style="text-align:center"><img src="/images/02.png" /></div>
+
+You must set the type of each property. For example, the event_id needs to be an integer, and it has the potential to be very large, so we select "Integer 64" for its type. 
+
+<div style="text-align:center"><img src="/images/03.png" /></div>
+
+After adding all the properties for the entities, we need to set up the relationships between the entities. Click the "+" button at the bottom of the "Relationships" table to add a new relationship from the currently selected entity to another one. These relationships will automatically be mapped by RestKit later. Let's begin with the Event entity. We add a new relationship by clicking the "+" button, then give it a name. Let's call the first one "attendees". It needs a destination entity, and since it describes the collection of attendees, the destination is naturally Attendee. Select this by clicking the drop-down menu in the "Destination" column of the "Relationships" table. For now, we cannot specify an inverse relationship from Attendee to Event because Attendee has no relationships. Since an Event can have many Attendees, we must navigate to the right pane in Xcode, select the third (database icon) segment, and check "To-Many Relationship", seen below. 
+
+<div style="text-align:center"><img src="/images/04.png" /></div>
+
+We need one more relationship on the Event entity, and that is for its location. So let's add a new relationship and call it "location", settings its destination to the Location entity. Again, we can't specify an inverse yet, and since it's a 1-1 relationship, we leave the "To-Many Relationship" box unchecked. 
+
+Now we move on to the Attendee entity. It needs a relationship called events which is the collection of all events the Attendee is attending. Its destination is the Event entity, and it is a to-many relationship. Now, if you will notice, you may select an inverse for this relationship by clicking the drop-down menu in the "Inverse" column of the "Relationships" table. The only available option is "attendees", so that's the one we must use. If we now head back to the Event entity, we will see that the inverse has automatically been determined by Xcode. 
+
+<div style="text-align:center"><img src="/images/05.png" /></div>
+
+Now there remains the Location entity. Setting up its relationship is left to the reader. We will assume that the reader has correctly done this. 
+
+<h3>Generating Managed Objects</h3>
+
+Now that our data model has been fully established, we need to generate these entities as Objective-C objects. Highlight all the entities in the data model, then proceed to Xcode's "New File" dialog. Select "Core Data" from the left pane, then choose "NSManagedObject subclass". This is an object that Core Data manages, from their memory to their dynamically resolved property getter and setter methods. Step through the dialog, and create the files. Xcode should have generated a header and an implementation file for each entitiy, as seen below. 
+
+<div style="text-align:center"><img src="/images/06.png" /></div>
+
+<h3>Added RestKit Mapping to Managed Object Subclasses</h3>
+
+If you ever change your data model, it is easiest to do so through Xcode's graphical interface, delete your generated files, and regenerate them through the "New File" dialog. It is for this reason that it isn't practical to add methods directly to these classes. So instead, we take advantage of the power of Objective-C categories to add methods which return the RestKit object mapping for each entity. To create a category, enter Xcode's "New File" dialog, select "Cocoa Touch" in the left pane, then select "Objective-C Category". You can name the category anything, but I find it best to be specific. Thus, I name the category "RestKit". You must create a category for each entity, so enter "RestKit" for the Category field and the name of the class on which the category is being created. For example, below we are creating a Category on the Event class called RestKit. 
+
+<div style="text-align:center"><img src="/images/07.png" /></div>
+
+In the header file, we define a method which returns an instance of the RKManagedObjectMapping class. This class lets RestKit know we are using Core Data to store the objects it fetches. It also defines the mapping from JSON to our entities and vice versa. In short, it is the glue that makes RestKit amazingly useful. Our header should look like this: 
+
+{% highlight c %}
+
+#import "Event.h"
+#import <RestKit/RestKit.h>
+
+@interface Event (RestKit)
+
++ (RKManagedObjectMapping *)mom;
+
+@end
+
+{% endhighlight %}
+
+Now we must implement this method. So in the implementation file, we fill it out:
+
+{% highlight c %}
+
+#import "Event+RestKit.h"
+#import "Attendee+RestKit.h"
+#import "Location+RestKit.h"
+
+@implementation Event (RestKit)
+
++ (RKManagedObjectMapping *)mom {
+  RKManagedObjectMapping *m = [RKManagedObjectMapping mappingForClass:[self class]];
+  [m mapAttributes:@"event_id", @"name", nil];
+  
+  RKObjectRelationshipMapping *attendees = [RKObjectRelationshipMapping mappingFromKeyPath:@"attendees" toKeyPath:@"attendees" withMapping:[Attendee mom]];
+  [m addRelationshipMapping:attendees];
+  
+  RKObjectRelationshipMapping *location = [RKObjectRelationshipMapping mappingFromKeyPath:@"location" toKeyPath:@"location" withMapping:[Location mom]];
+  [m addRelationshipMapping:location];
+  
+  m.primaryKeyAttribute = @"event_id";
+
+  return m;
+}
+
+@end
+
+{% endhighlight %}
+
+The Attendee and Location objects have similar implementations of this method, but they lack the relationship mappings (this is to prevent infite recursion because of each of the Event, Attendee, and Location objects' mom method calls mom on each of the three models). These are left as an exercise for the reader. Now that we have configured the Core Data model and generated our NSManagedObject subclasses and given them methods for returning their respective object mappings, we need to configure an object that communicates with the server and fetches a JSON response which is then mapped to Core Data managed objects. 
+
+<h3>Connecting to a Web Server</h3>
+
+Generally in our projects at Twin Engine Labs, we create a subclass of NSObject whose sole purpose is providing convenience methods for fetching data from the backend server and notifying the necessary objects that data has been fetched. For the sake of brevity, we will only provide an example of this within our view controller that also displays the data in a UITableView. Xcode provided a ViewController class, so this is the class we will use to fetch and display our data. We are assuming the reader knows how to add a tableview to a view controller's view and provide the necessary delegate and dataSource methods for a single-section table view. The delegate and dataSource methods, however, will utilize an NSFetchedResultsController to interface seamlessly with Core Data. The first step is to configure our RKObjectManager shared instance in the viewDidLoad method of ViewController. It should look something like this:
+
+{% highlight c %}
+
+- (void)viewDidLoad
+{
+    [super viewDidLoad];
+	// Do any additional setup after loading the view, typically from a nib.
+  
+  RKObjectManager *man = [RKObjectManager objectManagerWithBaseURL:@"http://127.0.0.1"];
+  RKManagedObjectStore *store = [RKManagedObjectStore objectStoreWithStoreFilename:@"CoreDataExample.sqlite"];
+  man.objectStore = store;
+  [man.objectStore save];
+  
+- (void)viewDidLoad
+{
+    [super viewDidLoad];
+	// Do any additional setup after loading the view, typically from a nib.
+  
+  RKObjectManager *man = [RKObjectManager objectManagerWithBaseURL:@"http://127.0.0.1"];
+  RKManagedObjectStore *store = [RKManagedObjectStore objectStoreWithStoreFilename:@"CoreDataExample.sqlite"];
+  man.objectStore = store;
+  [man.objectStore save];
+  
+  [man loadObjectsAtResourcePath:@"/events.json" objectMapping:[Event mom] delegate:self];
+}
+
+{% endhighlight %}
+
+We only have one base URL in this case, so we only ever have to specify it once. Each successive time we need an RKObjectManager, we will retrieve a singleton through RKObjectManager's sharedManager method. The next line sets up the managed object store which RestKit uses to store the managed objects that were mapped from the server's JSON response. We must assign this store to the RKObjectManager instance as its objectStore property in the next line. The next line is optional, but I prefer to save the object store before fetching new data. The last line constructs an asynchronous request to the server to return all its events and map them to the Event object (and we pass in self as the delegate so that when the mapping is complete, we can save the managed object context and write any changes to persistent storage through the RKObjectLoaderDelegate method objectLoader: didLoadObjects:). The RKObjectLoaderDelegate methods we generally implement are the following and appear near the bottom of ViewController in their own pragma mark.
+
+{% highlight c %}
+
+#pragma mark - RKObjectLoaderDelegate methods
+
+- (void)objectLoader:(RKObjectLoader *)objectLoader didLoadObjects:(NSArray *)objects {
+  NSError *error = nil;
+  [[[[objectLoader objectManager] objectStore] managedObjectContext] save:&error];
+}
+
+- (void)objectLoader:(RKObjectLoader *)objectLoader didFailWithError:(NSError *)error {
+  
+}
+
+{% endhighlight %}
+
+This simply saves the managed object context when the objects have been completely fetched and mapped. We leave it to the reader to define some behavior for notifying the user that the fetching/mapping of the server's data failed. Now we must configure our tableview for displaying the data in our Core Data store. The NSFetchedResultsController is a powerful controller for interacting with Core Data on a much higher level than SQL queries, and it provides methods for convenient use in the table view's delegate and dataSourcemethods.
+
+<h3>Configuring your NSFetchedResultsController</h3>
+
+Before configuring our tableview delegate and dataSource methods, we must first create a method to construct the NSFetchedResultsController which will fetch data from the SQLite database on the iOS device. We must declare it as a property, like so:
+
+{% highlight c %}
+
+#import <UIKit/UIKit.h>
+
+@interface ViewController : UIViewController <RKObjectLoaderDelegate> {
+  NSFetchedResultsController *_fetchedResultsController;
+}
+
+@property (nonatomic, strong) NSFetchedResultsController *fetchedResultsController;
+
+@end
+
+{% endhighlight %}
+
+And synthesize it:
+
+{% highlight c %}
+
+@synthesize fetchedResultsController=_fetchedResultsController;
+
+{% endhighlight %}
+
+Now we must override the getter method for this property so that it will create an NSFetchedResultsController instance if the _fetchedResultsController variable is nil. If it is not nil, then we simply return _fetchedResultsController. We will explain the following code further after presenting it.
+
+{% highlight c %}
+
+- (NSFetchedResultsController *)fetchedResultsController {
+  if (_fetchedResultsController != nil)
+    return _fetchedResultsController;
+  
+  NSFetchRequest *request = [[NSFetchRequest alloc] init];
+  
+  NSManagedObjectContext *moc = [[[RKObjectManager sharedManager] objectStore] managedObjectContext];
+  
+  NSEntityDescription *desc = [NSEntityDescription entityForName:@"Event" inManagedObjectContext:moc];
+  [request setEntity:desc];
+  
+  NSSortDescriptor *s = [NSSortDescriptor sortDescriptorWithKey:@"name" ascending:YES];
+  [request setSortDescriptors:[NSArray arrayWithObjects:s, nil]];
+  
+  [request setFetchBatchSize:20];
+  
+  NSFetchedResultsController *controller = [[NSFetchedResultsController alloc] initWithFetchRequest:request managedObjectContext:moc sectionNameKeyPath:nil cacheName:nil];
+  self.fetchedResultsController = controller;
+  _fetchedResultsController.delegate = self;
+  
+  return _fetchedResultsController;
+}
+
+{% endhighlight %}
+
+An NSFetchedResultsController needs an NSFetchRequest and an NSManagedObjectContext. The other parameters for the initializer can be nil, unless you need a sectioned tableview or want to specify a cache. So the first thing to do if _fetchedResultsController is nil is to configure the NSFetchRequest. The fetch request needs an entity description. This is the entity the NSFetchedResultsController will be fetching from Core Data. So we construct an NSEntityDescription and assign it as the entity of our fetch request. The fetch request also needs some way of sorting the entities it finds. You can speciy multiple sort descriptors (their order in the array specifies the order the descriptors will be used to organize the data), and we leave this to the discretion of the reader. For this example, we will sort by the name of the Event. It remains to set the fetchBatchSize of the fetch request, and we set it to something reasonable like 20. It is important to find a balance so that the device does not have to go to disk frequently, but it is also important for user experience that the fetch requests complete quickly. It should be noted that fetch requests can also have a predicate for further filtering, but this is optional. Now that we have our fetch request completely configured, we can create our NSFetchedResultsController instance. In its initializer we pass in our fetch request and the managedObjectContext of the shared RKObjectManager's managed object store. We assign this instance to the fetchedResultsController property (which in turn assigns it to the _fetchedResultsController variable), set the delegate of the controller so that we know when the contents of the object store have changed, and then return _fetchedResultsController. Now, calling self.fetchedResultsController as a getter will call this fetchedResultsController method, and we can begin configuring our tableview delegate and dataSource methods.
+
+<h3>Configuring a UITableView</h3>
+
+For this example, there are only four methods we will concern ourselves with:
+
+{% highlight c %}
+
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView;
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section;
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath;
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath;
+
+{% endhighlight %}
+
+We assume the reader knows what each of these methods does, so we will show the contents of each and explain the relevant concepts. We begin with numberOfSectionsInTableView:
+
+{% highlight c %}
+
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
+  return 1;
+}
+
+{% endhighlight %}
+
+For this example, we only need one section. If there were multiple sections, when configuring the NSFetchedResultsController, the sectionNameKeyPath parameter must be specified. This key path will be used by the NSFetchedResultsController to group the data into sections. That is, all entities whose values at this key path are the same will belong to a section. Next we inform the tableview of how many rows are in the requested section:
+
+{% highlight c %}
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+  return [[[_fetchedResultsController sections] objectAtIndex:section] numberOfObjects];
+}
+
+{% endhighlight %}
+
+We retrieve an array of the sections from the NSFetchedResultsController, then the object that describes the requested section. The final method returns the number of objects (i.e., the number of rows) in this section of the data. Now we construct a UITableViewCell for displaying the data:
+
+{% highlight c %}
+
+- (UITableViewCell *)tableView:(UITableView *)_tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+  static NSString *ident = @"tableCell";
+  UITableViewCell *cell = [_tableView dequeueReusableCellWithIdentifier:ident];
+  if (cell == nil) {
+    cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:ident];
+  }
+  
+  Event *e = [_fetchedResultsController objectAtIndexPath:indexPath];
+  [cell.textLabel setText:[e name]];
+  
+  return cell;
+}
+
+{% endhighlight %}
+
+First, we try to get a reused cell, but if it is nil, we must create one. After that, we retrieve the object this cell will represent. For this example, we just want to display name in a standard UITableViewCell's textLabel, but one can imagine more complicated tableview cells which must display multiple attributes of the fetched entities in multiple subviews. Finally, we respond to the selection of a cell within the tableview:
+
+{% highlight c %}
+
+- (void)tableView:(UITableView *)_tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+  [_tableView deselectRowAtIndexPath:indexPath animated:YES];
+  
+  Event *e = [_fetchedResultsController objectAtIndexPath:indexPath];
+  NSArray *attendees = [e.attendees sortedArrayUsingDescriptors:[NSArray arrayWithObjects:[NSSortDescriptor sortDescriptorWithKey:@"name" ascending:YES], nil]];
+  
+  NSMutableString *message = [NSMutableString string];
+  for (Attendee *a in attendees) {
+    [message appendFormat:@"%@ ", [a name]];
+  }
+  [message appendFormat:@" %@ coming to the event at %@.", (attendees.count > 1 ? @"are" : @"is"), [[e location] name]];
+  
+  UIAlertView *av = [[UIAlertView alloc] initWithTitle:[e name] message:message delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
+  [av show];
+}
+
+{% endhighlight %}
+
+In this example, we merely wish to illustrate the automatic relationship mapping of RestKit. In a real scenario, you may want to push a view controller onto the stack that displays more information about the selected object. In this case, we construct a string from the names of all the attendees and display the name of the location of this event in an alert view. Before we can successfully run this, though, we have to make one addendum to the viewDidLoad method of this view controller:
+
+{% highlight c %}
+
+- (void)viewDidLoad
+{
+    [super viewDidLoad];
+	// Do any additional setup after loading the view, typically from a nib.
+  
+  RKObjectManager *man = [RKObjectManager objectManagerWithBaseURL:@"http://127.0.0.1"];
+  RKManagedObjectStore *store = [RKManagedObjectStore objectStoreWithStoreFilename:@"CoreDataExample.sqlite"];
+  man.objectStore = store;
+  [man.objectStore save];
+  
+  [man loadObjectsAtResourcePath:@"/events.json" objectMapping:[Event mom] delegate:self];
+  
+  UITableView *tv = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, 320, 416) style:UITableViewStylePlain];
+  tv.delegate = self;
+  tv.dataSource = self;
+  [self.view addSubview:tv];
+  self.tableView = tv;
+  
+  NSError *error = nil;
+  if (![self.fetchedResultsController performFetch:&error]) {
+    exit(-1);
+  } else {
+    [self.tableView reloadData];
+  }
+}
+
+{% endhighlight %}
+
+We declared a tableView property, and for simplicity's sake, we construct a tableview in code, assign it to the tableView property, then call the getter for our NSFetchedResultsController property for the first time in the view controller's life cycle. We must attempt to perform the controller's fetch, so we pass in a dereferenced NSError object. performFetch: returns a boolean indicating whether the fetch was successful or not. Thus, if it returns YES, we simply need to reload the tableview. Otherwise, we should handle the error. Generally, exit(-1) is called upon error. And there is one final delegate method we must define. The controllerDidChangeContent: method belongs to the NSFetchedResultsControllerDelegate protocol. This method is fired when the NSFetchedResultsController's data changes, and for simplicity's sake, we simply reload the tableview:
+
+{% highlight c %}
+
+- (void)controllerDidChangeContent:(NSFetchedResultsController *)controller {
+  [self.tableView reloadData];
+}
+
+{% endhighlight %}
+
+And that's all there is to it! If you want animations when reloading the tableview, see the NSFetchedResultsControllerDelegate protocol reference for additional methods that notify the delegate of more detailed changes.
