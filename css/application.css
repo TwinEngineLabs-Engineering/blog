@@ -126,16 +126,6 @@ body {
 .footer h4 {
   color:#FFFFFF;
 } 
-.frow { 
-  background:url(../img/row.png) top left no-repeat; 
-  background:url(../img/row.png) 5% 0% no-repeat; 
-  padding-top:20px;
-}
-.frow_white { 
-  background:url(../img/row_w.png) top left no-repeat; 
-  background:url(../img/row_w.png) 30% 0% no-repeat; 
-  padding-top:20px;
-}
 /* end of footer */
 
 .branding {
