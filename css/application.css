@@ -62,12 +62,17 @@ body {
 .team div.span2 {
   height: 100px;
   width: 155px;
-  border: 1px solid #EEE;
+  border: 1px solid #CCC;
   -webkit-border-radius: 4px;
   border-radius: 4px;
   margin-bottom: 20px;
   padding-top: 10px;
+  box-shadow: 4px 4px 12px 4px rgba(0,0,0,0.1);
 
+}
+
+.team div.span2:hover {
+  background-color: #333;
 }
 
 .team div.span2 a {
@@ -126,16 +131,6 @@ body {
 .footer h4 {
   color:#FFFFFF;
 } 
-.frow { 
-  background:url(../img/row.png) top left no-repeat; 
-  background:url(../img/row.png) 5% 0% no-repeat; 
-  padding-top:20px;
-}
-.frow_white { 
-  background:url(../img/row_w.png) top left no-repeat; 
-  background:url(../img/row_w.png) 30% 0% no-repeat; 
-  padding-top:20px;
-}
 /* end of footer */
 
 .branding {
