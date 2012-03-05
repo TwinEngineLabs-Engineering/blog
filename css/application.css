@@ -62,12 +62,16 @@ body {
 .team div.span2 {
   height: 100px;
   width: 155px;
-  border: 1px solid #EEE;
+  border: 1px solid #333;
   -webkit-border-radius: 4px;
   border-radius: 4px;
   margin-bottom: 20px;
   padding-top: 10px;
 
+}
+
+.team div.span2:hover {
+  background-color: #333;
 }
 
 .team div.span2 a {
