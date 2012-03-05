@@ -62,11 +62,12 @@ body {
 .team div.span2 {
   height: 100px;
   width: 155px;
-  border: 1px solid #333;
+  border: 1px solid #CCC;
   -webkit-border-radius: 4px;
   border-radius: 4px;
   margin-bottom: 20px;
   padding-top: 10px;
+  box-shadow: 4px 4px 12px 4px rgba(0,0,0,0.1);
 
 }
 
