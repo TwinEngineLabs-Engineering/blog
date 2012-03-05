@@ -18,6 +18,7 @@ body {
   background: url(/images/bg-home-banner.png) 0 0 no-repeat;
   min-height: 419px;
   padding-top: 20px;
+  margin-left: 0px;
 }
 
 #main {
@@ -149,3 +150,43 @@ body {
 .tel-menu .span1 {
   margin-left: 10px;
 }
+
+/* class: .btn-the-bizzniss-1,  color theme: The Bizzniss */
+.btn-the-bizzniss-1 { text-shadow: 0px -1px 0px #020d12; color: #ffffff; background-color: #202B30; background-image: -moz-linear-gradient(top, #3e494e, #020d12); background-image: -ms-linear-gradient(top, #3e494e, #020d12); background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#3e494e), to(#020d12)); background-image: -webkit-linear-gradient(top, #3e494e, #020d12); background-image: -o-linear-gradient(top, #3e494e, #020d12); background-image: linear-gradient(top, #3e494e, #020d12); filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#3e494e', endColorstr='#020d12', GradientType=0); border-color: #202B30 #020d12 #020d12 #202B30; border-color: rgba(0, 0, 0, 0.25) rgba(0, 0, 0, 0.35) rgba(0, 0, 0, 0.35) rgba(0, 0, 0, 0.25); }
+.btn-the-bizzniss-1:hover, .btn-the-bizzniss-1:active, .btn-the-bizzniss-1.active, .btn-the-bizzniss-1.disabled, .btn-the-bizzniss-1[disabled] { background-color: #020d12; }
+.btn-the-bizzniss-1:hover { color: #e8f3f8; text-shadow: 0px -1px 0px #000000; }
+.btn-the-bizzniss-1:focus { color: #848f94; -webkit-box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.15), 0 1px 2px rgba(0, 0, 0, 0.05); -moz-box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.15), 0 1px 2px rgba(0, 0, 0, 0.05); box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.15), 0 1px 2px rgba(0, 0, 0, 0.05); border-color: #202B30 #020d12 #020d12 #202B30; border-color: rgba(0, 0, 0, 0.25) rgba(0, 0, 0, 0.35) rgba(0, 0, 0, 0.35) rgba(0, 0, 0, 0.25); }
+.btn-the-bizzniss-1.active, .btn-the-bizzniss-1:active { background-image: none; -webkit-box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.15), 0 1px 2px rgba(0, 0, 0, 0.05); -moz-box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.15), 0 1px 2px rgba(0, 0, 0, 0.05); box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.15), 0 1px 2px rgba(0, 0, 0, 0.05); color: #848f94; }
+/* end .btn-the-bizzniss-1 */
+
+/* class: .btn-the-bizzniss-2,  color theme: The Bizzniss */
+.btn-the-bizzniss-2 { text-shadow: 0px -1px 0px #30535a; color: #ffffff; background-color: #4E7178; background-image: -moz-linear-gradient(top, #6c8f96, #30535a); background-image: -ms-linear-gradient(top, #6c8f96, #30535a); background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#6c8f96), to(#30535a)); background-image: -webkit-linear-gradient(top, #6c8f96, #30535a); background-image: -o-linear-gradient(top, #6c8f96, #30535a); background-image: linear-gradient(top, #6c8f96, #30535a); filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#6c8f96', endColorstr='#30535a', GradientType=0); border-color: #4E7178 #30535a #30535a #4E7178; border-color: rgba(0, 0, 0, 0.25) rgba(0, 0, 0, 0.35) rgba(0, 0, 0, 0.35) rgba(0, 0, 0, 0.25); }
+.btn-the-bizzniss-2:hover, .btn-the-bizzniss-2:active, .btn-the-bizzniss-2.active, .btn-the-bizzniss-2.disabled, .btn-the-bizzniss-2[disabled] { background-color: #30535a; }
+.btn-the-bizzniss-2:hover { color: #ffffff; text-shadow: 0px -1px 0px #12353c; }
+.btn-the-bizzniss-2:focus { color: #b2d5dc; -webkit-box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.15), 0 1px 2px rgba(0, 0, 0, 0.05); -moz-box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.15), 0 1px 2px rgba(0, 0, 0, 0.05); box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.15), 0 1px 2px rgba(0, 0, 0, 0.05); border-color: #4E7178 #30535a #30535a #4E7178; border-color: rgba(0, 0, 0, 0.25) rgba(0, 0, 0, 0.35) rgba(0, 0, 0, 0.35) rgba(0, 0, 0, 0.25); }
+.btn-the-bizzniss-2.active, .btn-the-bizzniss-2:active { background-image: none; -webkit-box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.15), 0 1px 2px rgba(0, 0, 0, 0.05); -moz-box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.15), 0 1px 2px rgba(0, 0, 0, 0.05); box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.15), 0 1px 2px rgba(0, 0, 0, 0.05); color: #b2d5dc; }
+/* end .btn-the-bizzniss-2 */
+
+/* class: .btn-the-bizzniss-3,  color theme: The Bizzniss */
+.btn-the-bizzniss-3 { text-shadow: 0px -1px 0px #318b9a; color: #ffffff; background-color: #4FA9B8; background-image: -moz-linear-gradient(top, #6dc7d6, #318b9a); background-image: -ms-linear-gradient(top, #6dc7d6, #318b9a); background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#6dc7d6), to(#318b9a)); background-image: -webkit-linear-gradient(top, #6dc7d6, #318b9a); background-image: -o-linear-gradient(top, #6dc7d6, #318b9a); background-image: linear-gradient(top, #6dc7d6, #318b9a); filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#6dc7d6', endColorstr='#318b9a', GradientType=0); border-color: #4FA9B8 #318b9a #318b9a #4FA9B8; border-color: rgba(0, 0, 0, 0.25) rgba(0, 0, 0, 0.35) rgba(0, 0, 0, 0.35) rgba(0, 0, 0, 0.25); }
+.btn-the-bizzniss-3:hover, .btn-the-bizzniss-3:active, .btn-the-bizzniss-3.active, .btn-the-bizzniss-3.disabled, .btn-the-bizzniss-3[disabled] { background-color: #318b9a; }
+.btn-the-bizzniss-3:hover { color: #ffffff; text-shadow: 0px -1px 0px #136d7c; }
+.btn-the-bizzniss-3:focus { color: #b3ffff; -webkit-box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.15), 0 1px 2px rgba(0, 0, 0, 0.05); -moz-box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.15), 0 1px 2px rgba(0, 0, 0, 0.05); box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.15), 0 1px 2px rgba(0, 0, 0, 0.05); border-color: #4FA9B8 #318b9a #318b9a #4FA9B8; border-color: rgba(0, 0, 0, 0.25) rgba(0, 0, 0, 0.35) rgba(0, 0, 0, 0.35) rgba(0, 0, 0, 0.25); }
+.btn-the-bizzniss-3.active, .btn-the-bizzniss-3:active { background-image: none; -webkit-box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.15), 0 1px 2px rgba(0, 0, 0, 0.05); -moz-box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.15), 0 1px 2px rgba(0, 0, 0, 0.05); box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.15), 0 1px 2px rgba(0, 0, 0, 0.05); color: #b3ffff; }
+/* end .btn-the-bizzniss-3 */
+
+/* class: .btn-the-bizzniss-4,  color theme: The Bizzniss */
+.btn-the-bizzniss-4 { text-shadow: 0px -1px 0px #56a2b1; color: #ffffff; background-color: #74C0CF; background-image: -moz-linear-gradient(top, #92deed, #56a2b1); background-image: -ms-linear-gradient(top, #92deed, #56a2b1); background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#92deed), to(#56a2b1)); background-image: -webkit-linear-gradient(top, #92deed, #56a2b1); background-image: -o-linear-gradient(top, #92deed, #56a2b1); background-image: linear-gradient(top, #92deed, #56a2b1); filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#92deed', endColorstr='#56a2b1', GradientType=0); border-color: #74C0CF #56a2b1 #56a2b1 #74C0CF; border-color: rgba(0, 0, 0, 0.25) rgba(0, 0, 0, 0.35) rgba(0, 0, 0, 0.35) rgba(0, 0, 0, 0.25); }
+.btn-the-bizzniss-4:hover, .btn-the-bizzniss-4:active, .btn-the-bizzniss-4.active, .btn-the-bizzniss-4.disabled, .btn-the-bizzniss-4[disabled] { background-color: #56a2b1; }
+.btn-the-bizzniss-4:hover { color: #ffffff; text-shadow: 0px -1px 0px #388493; }
+.btn-the-bizzniss-4:focus { color: #d8ffff; -webkit-box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.15), 0 1px 2px rgba(0, 0, 0, 0.05); -moz-box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.15), 0 1px 2px rgba(0, 0, 0, 0.05); box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.15), 0 1px 2px rgba(0, 0, 0, 0.05); border-color: #74C0CF #56a2b1 #56a2b1 #74C0CF; border-color: rgba(0, 0, 0, 0.25) rgba(0, 0, 0, 0.35) rgba(0, 0, 0, 0.35) rgba(0, 0, 0, 0.25); }
+.btn-the-bizzniss-4.active, .btn-the-bizzniss-4:active { background-image: none; -webkit-box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.15), 0 1px 2px rgba(0, 0, 0, 0.05); -moz-box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.15), 0 1px 2px rgba(0, 0, 0, 0.05); box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.15), 0 1px 2px rgba(0, 0, 0, 0.05); color: #d8ffff; }
+/* end .btn-the-bizzniss-4 */
+
+/* class: .btn-the-bizzniss-5,  color theme: The Bizzniss */
+.btn-the-bizzniss-5 { text-shadow: 0px 1px 0px #ffffff; color: #a1a792; background-color: #F1F7E2; background-image: -moz-linear-gradient(top, #ffffff, #d3d9c4); background-image: -ms-linear-gradient(top, #ffffff, #d3d9c4); background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#ffffff), to(#d3d9c4)); background-image: -webkit-linear-gradient(top, #ffffff, #d3d9c4); background-image: -o-linear-gradient(top, #ffffff, #d3d9c4); background-image: linear-gradient(top, #ffffff, #d3d9c4); filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffffff', endColorstr='#d3d9c4', GradientType=0); border-color: #F1F7E2 #d3d9c4 #d3d9c4 #F1F7E2; border-color: rgba(0, 0, 0, 0.25) rgba(0, 0, 0, 0.35) rgba(0, 0, 0, 0.35) rgba(0, 0, 0, 0.25); }
+.btn-the-bizzniss-5:hover, .btn-the-bizzniss-5:active, .btn-the-bizzniss-5.active, .btn-the-bizzniss-5.disabled, .btn-the-bizzniss-5[disabled] { background-color: #d3d9c4; }
+.btn-the-bizzniss-5:hover { color: #8d937e; text-shadow: 0px 1px 0px #ffffff; }
+.btn-the-bizzniss-5:focus { color: #515742; -webkit-box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.15), 0 1px 2px rgba(0, 0, 0, 0.05); -moz-box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.15), 0 1px 2px rgba(0, 0, 0, 0.05); box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.15), 0 1px 2px rgba(0, 0, 0, 0.05); border-color: #F1F7E2 #d3d9c4 #d3d9c4 #F1F7E2; border-color: rgba(0, 0, 0, 0.25) rgba(0, 0, 0, 0.35) rgba(0, 0, 0, 0.35) rgba(0, 0, 0, 0.25); }
+.btn-the-bizzniss-5.active, .btn-the-bizzniss-5:active { background-image: none; -webkit-box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.15), 0 1px 2px rgba(0, 0, 0, 0.05); -moz-box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.15), 0 1px 2px rgba(0, 0, 0, 0.05); box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.15), 0 1px 2px rgba(0, 0, 0, 0.05); color: #515742; }
+/* end .btn-the-bizzniss-5 */
