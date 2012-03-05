@@ -1,0 +1,10 @@
+---
+layout: default
+title: Morris Lessmore
+categories:
+  projects
+excerpt: A list of Mike Mayo's coding projects.
+---
+
+
+"Moonbot Studios":http://moonbotstudios.com/ partnered with Twin Engine Labs in this absolutely stunning piece of artwork. Moonbot has dubbed it "Interactive Storytelling", and though together we've raised the bar of what was expected of children's story books, we've barely even scratched the surface. Each of the gorgeously animated 28 pages has a unique and fun interaction, many of them full blown games all on their own. On one page you may be playing with alphabet cereal, on another you can spin a tornado, and on another you can help Morris fly through the words of a book. In the first week, it skyrocketed to the top of the Books paid charts, beating some serious contenders in the space. Don't take our word for it, though. Look below for the amazing amount of press that this app received after only a week of being launched.
